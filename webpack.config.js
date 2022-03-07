@@ -4,7 +4,7 @@ const autoprefixer = require('autoprefixer')
 const HubSpotAutoUploadPlugin = require('@hubspot/webpack-cms-plugins')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const hubspotConfig = ({ portal, autoupload }) => {
+const hubspotConfig = ({ portal, autoupload } = {}) => {
 	return {
 		target: 'web',
 		entry: {
@@ -30,7 +30,7 @@ const hubspotConfig = ({ portal, autoupload }) => {
 					},
 				},
 				{
-					test: /\.s(s(a|c)ss)$/i,
+					test: /\.s[ac]ss$/i,
 					use: [
 						MiniCssExtractPlugin.loader,
 						{ loader: 'css-loader', options: { url: false } },

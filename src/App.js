@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.scss'
+import SpinningLogo from './components/SpinningLogo/SpinningLogo'
+import Card from './components/Card/Card'
+import reactLogo from './images/logo.svg'
+import sprocketLogo from './images/sprocket.svg'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App({ moduleData }) {
+	// eslint-disable-next-line no-console
+	console.log(
+		'all of your data typically accessed via the "module" keyword in HubL is available as JSON here!',
+		moduleData
+	)
+	return (
+		<div className='cms-react-boilerplate__container'>
+			<div className='spinning-logo__container'>
+				<SpinningLogo src={reactLogo} alt='react logo' />
+				<SpinningLogo
+					src={sprocketLogo}
+					alt='sprocket logo'
+					isSprocket={true}
+				/>
+			</div>
+			<p>
+				Edit <code>src/App.js</code> and save to reload.
+			</p>
+			<Card initialClickCount={moduleData.initial_count} />
+		</div>
+	)
 }
 
-export default App;
+export default App

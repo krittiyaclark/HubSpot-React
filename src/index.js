@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.scss'
+import App from './App'
+import ErrorBoundary from './components/ErrorBoundary'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const targetModulesData = document.querySelectorAll(
+	'.cms-react-boilerplate > script[type="application/json"]'
+)
+targetModulesData.forEach(({ dataset, textContent }) => {
+	const root = document.getElementById(`App--${dataset.moduleInstance}`)
+	return ReactDOM.render(
+		<ErrorBoundary>
+			<App
+				portalId={dataset.portalId}
+				moduleData={JSON.parse(textContent)}
+				moduleInstance={dataset.moduleInstance}
+			/>
+		</ErrorBoundary>,
+		root
+	)
+})
